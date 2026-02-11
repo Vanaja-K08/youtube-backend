@@ -1,3 +1,4 @@
+import Channel from "../models/Channel.js";
 import Video from "../models/Video.js";
 
 /* CREATE VIDEO */

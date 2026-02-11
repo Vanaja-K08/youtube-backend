@@ -18,7 +18,7 @@ app.use(express.json());
 
 app.use("/api/auth", authRoutes);
 app.use("/api/videos", videoRoutes);
-app.use("/api/channels", channelRoutes);
+app.use("/api/channel", channelRoutes);
 app.use("/api/comments", commentRoutes);
 
 mongoose

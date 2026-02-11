@@ -104,3 +104,23 @@ export const getVideos = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 };
+
+
+
+export const getMyVideos = async (req, res) => {
+  const videos = await Video.find({ user: req.user.id });
+  res.json(videos);
+};
+
+export const updateVideo = async (req, res) => {
+  const video = await Video.findById(req.params.id);
+
+  if (video.user.toString() !== req.user.id) {
+    return res.status(403).json({ message: "Not allowed" });
+  }
+
+  video.title = req.body.title || video.title;
+  await video.save();
+
+  res.json(video);
+};

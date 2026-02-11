@@ -1,11 +1,44 @@
 import Video from "../models/Video.js";
 
 /* CREATE VIDEO */
-export const createVideo = async (req, res) => {
-  const video = await Video.create(req.body);
-  res.status(201).json(video);
-};
+// export const createVideo = async (req, res) => {
+//   const video = await Video.create(req.body);
+//   res.status(201).json(video);
+// };
 
+
+// export const createVideo = async (req, res) => {
+//   try {
+//     const video = await Video.create({
+//       ...req.body,
+//       user: req.user.id
+//     });
+
+//     res.status(201).json(video);
+//   } catch (err) {
+//     res.status(500).json({ message: err.message });
+//   }
+// };
+
+
+export const createVideo = async (req, res) => {
+  try {
+    const channel = await Channel.findOne({ owner: req.user.id });
+
+    if (!channel)
+      return res.status(404).json({ message: "Create channel first" });
+
+    const video = await Video.create({
+      ...req.body,
+      user: req.user.id,
+      channel: channel._id
+    });
+
+    res.status(201).json(video);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+};
 /* GET ALL VIDEOS (with channel name) */
 export const getAllVideos = async (req, res) => {
   const videos = await Video.find()
@@ -102,10 +135,13 @@ export const getVideos = async (req, res) => {
 };
 
 
-
 export const getMyVideos = async (req, res) => {
-  const videos = await Video.find({ user: req.user.id });
-  res.json(videos);
+  try {
+    const videos = await Video.find({ user: req.user.id });
+    res.json(videos);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
 };
 
 export const updateVideo = async (req, res) => {
@@ -119,4 +155,13 @@ export const updateVideo = async (req, res) => {
   await video.save();
 
   res.json(video);
+};
+
+export const deleteVideo = async (req, res) => {
+  try {
+    await Video.findByIdAndDelete(req.params.id);
+    res.json({ message: "Video deleted" });
+  } catch {
+    res.status(500).json({ message: "Delete failed" });
+  }
 };

@@ -1,0 +1,57 @@
+GIT url
+------------------------
+https://github.com/Vanaja-K08/youtube-backend
+
+YouTube Clone — Backend API
+
+A RESTful backend for a YouTube Clone application built with Node.js, Express, MongoDB, and JWT Authentication.
+This API handles authentication, channels, videos, likes/dislikes, and comments.
+
+Features
+🔐 Authentication
+-----------------------------------
+Register user
+Login user
+JWT token authentication
+Protected routes
+
+
+Channels
+-----------------------------
+Create channel
+Get channel by ID
+User can only create one channel
+
+🎥 Videos
+-----------------------------
+Upload video metadata
+Fetch all videos
+Fetch single video
+Update video
+Delete video
+Filter videos by category/search
+
+
+💬 Comments
+-------------------------------------------
+Add comment
+Get comments for video
+Edit comment
+Delete comment
+
+👍 Reactions
+----------------------------
+Like video
+Dislike video
+Toggle logic
+
+🛠 Tech Stack
+---------------------------------
+Node.js
+Express.js
+MongoDB
+Mongoose
+JWT
+bcrypt
+dotenv
+CORS

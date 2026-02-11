@@ -7,7 +7,7 @@ const videoSchema = new mongoose.Schema(
     thumbnailUrl: String,
     videoUrl: String,
     views: { type: Number, default: 0 },
-    category: String,
+   category: { type: String, default: "All" },
 
     channel: {
       type: mongoose.Schema.Types.ObjectId,

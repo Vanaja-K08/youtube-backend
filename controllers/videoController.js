@@ -76,9 +76,7 @@ export const dislikeVideo = async (req, res) => {
   }
 };
 
-
-
-/* GET VIDEOS WITH SEARCH & FILTER */
+/* SEARCH + FILTER */
 export const getVideos = async (req, res) => {
   try {
     const { search, category } = req.query;
@@ -95,9 +93,7 @@ export const getVideos = async (req, res) => {
       filter.category = category;
     }
 
-    const videos = await Video.find(filter)
-      .populate("channel", "name")
-      .sort({ createdAt: -1 });
+    const videos = await Video.find(filter).sort({ createdAt: -1 });
 
     res.json(videos);
   } catch (error) {
